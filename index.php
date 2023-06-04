@@ -95,57 +95,75 @@
     		<h4>Ditemukan: <?= mysqli_num_rows($jadwal_latihan); ?></h4>
         	<a href="index.php" class="button">Reset</a>
     	<?php endif ?>
-		<h3>Status: Belum</h3>
-    	<div class="row">
-    		<?php if (mysqli_num_rows($jadwal_latihan_belum) > 0): ?>
-    			<?php foreach ($jadwal_latihan_belum as $data): ?>
-		    		<div class="col">
-		    			<div class="card">
-				    		<h4>Status: <?= $data['status']; ?></h4>
-				    		<h4>Tanggal Latihan: <?= date("d-m-Y, H:i", strtotime($data['tanggal_latihan'])); ?></h4>
-				    		<h4>Latihan: <?= $data['nama_latihan']; ?></h4>
-				    		<h4>Durasi: <?= str_replace(",", ".", number_format($data['durasi'])); ?> detik</h4>
-				    		<?php if ($data['status'] == 'BELUM'): ?>
-					    		<a href="ubah_status.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-green">Sudah?</a>
-				    		<?php endif ?>
-				    		<a href="ubah_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-yellow">Ubah</a>
-				    		<a onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal latihan <?= $data['nama_latihan']; ?>?')" href="hapus_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-red">Hapus</a>
-				    	</div>
-		    		</div>
-		    	<?php endforeach ?>
-		    <?php else: ?>
-    			<div class="card">
-			    	<h4>Tidak ada Latihan</h4>
-			    </div>
-    		<?php endif ?>
-    	</div>
-    	<br>
-    	<hr>
-    	<br>
-    	<h3>Status: Sudah</h3>
-    	<div class="row">
-    		<?php if (mysqli_num_rows($jadwal_latihan_sudah) > 0): ?>
-	    		<?php foreach ($jadwal_latihan_sudah as $data): ?>
-		    		<div class="col">
-		    			<div class="card">
-				    		<h4>Status: <?= $data['status']; ?></h4>
-				    		<h4>Tanggal Latihan: <?= date("d-m-Y, H:i", strtotime($data['tanggal_latihan'])); ?></h4>
-				    		<h4>Latihan: <?= $data['nama_latihan']; ?></h4>
-				    		<h4>Durasi: <?= str_replace(",", ".", number_format($data['durasi'])); ?> detik</h4>
-				    		<?php if ($data['status'] == 'BELUM'): ?>
-					    		<a href="ubah_status.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-green">Sudah?</a>
-				    		<?php endif ?>
-				    		<a href="ubah_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-yellow">Ubah</a>
-				    		<a onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal latihan <?= $data['nama_latihan']; ?>?')" href="hapus_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-red">Hapus</a>
-				    	</div>
-		    		</div>
-		    	<?php endforeach ?>
-		    <?php else: ?>
-		    	<div class="card">
-			    	<h4>Tidak ada Latihan</h4>
-			    </div>
-		    <?php endif ?>
-    	</div>
+		<?php if (isset($_POST['btnCari'])): ?>
+			<?php foreach ($jadwal_latihan as $data): ?>
+	    		<div class="col">
+	    			<div class="card">
+			    		<h4>Status: <?= $data['status']; ?></h4>
+			    		<h4>Tanggal Latihan: <?= date("d-m-Y, H:i", strtotime($data['tanggal_latihan'])); ?></h4>
+			    		<h4>Latihan: <?= $data['nama_latihan']; ?></h4>
+			    		<h4>Durasi: <?= str_replace(",", ".", number_format($data['durasi'])); ?> detik</h4>
+			    		<?php if ($data['status'] == 'BELUM'): ?>
+				    		<a href="ubah_status.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-green">Sudah?</a>
+			    		<?php endif ?>
+			    		<a href="ubah_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-yellow">Ubah</a>
+			    		<a onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal latihan <?= $data['nama_latihan']; ?>?')" href="hapus_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-red">Hapus</a>
+			    	</div>
+	    		</div>
+	    	<?php endforeach ?>
+		<?php else: ?>
+			<h3>Status: Belum</h3>
+	    	<div class="row">
+	    		<?php if (mysqli_num_rows($jadwal_latihan_belum) > 0): ?>
+	    			<?php foreach ($jadwal_latihan_belum as $data): ?>
+			    		<div class="col">
+			    			<div class="card">
+					    		<h4>Status: <?= $data['status']; ?></h4>
+					    		<h4>Tanggal Latihan: <?= date("d-m-Y, H:i", strtotime($data['tanggal_latihan'])); ?></h4>
+					    		<h4>Latihan: <?= $data['nama_latihan']; ?></h4>
+					    		<h4>Durasi: <?= str_replace(",", ".", number_format($data['durasi'])); ?> detik</h4>
+					    		<?php if ($data['status'] == 'BELUM'): ?>
+						    		<a href="ubah_status.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-green">Sudah?</a>
+					    		<?php endif ?>
+					    		<a href="ubah_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-yellow">Ubah</a>
+					    		<a onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal latihan <?= $data['nama_latihan']; ?>?')" href="hapus_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-red">Hapus</a>
+					    	</div>
+			    		</div>
+			    	<?php endforeach ?>
+			    <?php else: ?>
+	    			<div class="card">
+				    	<h4>Tidak ada Latihan</h4>
+				    </div>
+	    		<?php endif ?>
+	    	</div>
+	    	<br>
+	    	<hr>
+	    	<br>
+	    	<h3>Status: Sudah</h3>
+	    	<div class="row">
+	    		<?php if (mysqli_num_rows($jadwal_latihan_sudah) > 0): ?>
+		    		<?php foreach ($jadwal_latihan_sudah as $data): ?>
+			    		<div class="col">
+			    			<div class="card">
+					    		<h4>Status: <?= $data['status']; ?></h4>
+					    		<h4>Tanggal Latihan: <?= date("d-m-Y, H:i", strtotime($data['tanggal_latihan'])); ?></h4>
+					    		<h4>Latihan: <?= $data['nama_latihan']; ?></h4>
+					    		<h4>Durasi: <?= str_replace(",", ".", number_format($data['durasi'])); ?> detik</h4>
+					    		<?php if ($data['status'] == 'BELUM'): ?>
+						    		<a href="ubah_status.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-green">Sudah?</a>
+					    		<?php endif ?>
+					    		<a href="ubah_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-yellow">Ubah</a>
+					    		<a onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal latihan <?= $data['nama_latihan']; ?>?')" href="hapus_jadwal_latihan.php?id_jadwal_latihan=<?= $data['id_jadwal_latihan']; ?>" class="button bg-red">Hapus</a>
+					    	</div>
+			    		</div>
+			    	<?php endforeach ?>
+			    <?php else: ?>
+			    	<div class="card">
+				    	<h4>Tidak ada Latihan</h4>
+				    </div>
+			    <?php endif ?>
+	    	</div>
+		<?php endif ?>
     </div>
 </body>
 </html>
